@@ -11,6 +11,7 @@
 		<Description>M3U8文件解析器</Description>
 		<PackageProjectUrl>https://github.com/fallingrust/M3uParser</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/fallingrust/M3uParser</RepositoryUrl>
+		<PackageId>M3uParserSharp</PackageId>
 	</PropertyGroup>
 
 </Project>
