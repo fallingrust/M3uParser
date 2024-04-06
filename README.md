@@ -1,7 +1,7 @@
 # M3uParser
 
 <a href="https://www.nuget.org/packages/M3uParserSharp">
-  <img alt="Stars" src="https://buildstats.info/nuget/M3uParserSharp">
+  <img alt="nuget" src="https://buildstats.info/nuget/M3uParserSharp">
 </a>
 <a href="https://github.com/fallingrust/M3uParser/graphs/contributors">
 <img alt="Contributors" src="https://img.shields.io/github/contributors/fallingrust/M3uParser.svg?style=flat-square">
