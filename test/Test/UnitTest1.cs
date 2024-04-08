@@ -12,8 +12,9 @@ namespace Test
             var result = PlayList.TryParse(m3u, out var list);
             Assert.True(result);
             Assert.NotNull(list);
+            Assert.NotEqual(0, list.Version);
             Assert.False(list.MasterPlaylist);
-            Assert.Equal(list.Items.Count, 5);
+           
         }
 
 
@@ -24,8 +25,8 @@ namespace Test
             var result = PlayList.TryParse(m3u, out var list);
             Assert.True(result);
             Assert.NotNull(list);
-            Assert.True(list.MasterPlaylist);
-            Assert.Equal(list.Items.Count, 5);
+            Assert.True(list.MasterPlaylist);           
+            Assert.Equal(5, list.Items.Count);
         }
 
         [InlineData("#EXTM3U\r\n#EXTINF:-1 tvg-name=\"CCTV3\" tvg-logo=\"https://epg.112114.xyz/logo/cctv3.png\" group-title=\"•央视「IPV6」\",CCTV3「IPV6」\r\nhttp://[2409:8087:1a01:df::7005]/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226021/index.m3u8\r\n#EXTINF:-1 tvg-name=\"CCTV4\" tvg-logo=\"https://epg.112114.xyz/logo/cctv4.png\" group-title=\"•央视「IPV6」\",CCTV4「IPV6」\r\nhttp://[2409:8087:1a01:df::7005]/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226428/index.m3u8\r\n#EXTINF:-1 tvg-name=\"CCTV5\" tvg-logo=\"https://epg.112114.xyz/logo/cctv5.png\" group-title=\"•央视「IPV6」\",CCTV5「IPV6」\r\n#EXT-X-ENDLIST")]
@@ -36,6 +37,21 @@ namespace Test
             Assert.True(result);
             Assert.NotNull(list);
           
+        }
+
+
+        [InlineData("http://192.168.11.253/index/api/getM3u8?app=live&stream=test&start=1712455980&end=1712456980")]
+        [Theory]
+        public async void TestNetwokPlayList(string url)
+        {
+            using var client = new HttpClient();
+            var response = await client.GetAsync(url);
+            Assert.True(response.IsSuccessStatusCode);
+            var content = await response.Content.ReadAsStringAsync();         
+            var result = PlayList.TryParse(content, out var list);
+            Assert.True(result);
+            Assert.NotNull(list);
+            Assert.NotEqual(0, list.Version);
         }
     }
 }

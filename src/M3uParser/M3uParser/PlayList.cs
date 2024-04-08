@@ -19,7 +19,7 @@ namespace M3uParser
         public static bool TryParse(string m3u8, out PlayList? playList)
         {
             playList = null;
-            var lines = m3u8.Split("#").Where(p => !string.IsNullOrWhiteSpace(p)).Select(p => "#" + p.Replace("\r\n", ","));
+            var lines = m3u8.Split("#").Where(p => !string.IsNullOrWhiteSpace(p)).Select(p => "#" + p.Replace("\r\n", ",").Replace("\n",""));
             
             if (!lines.Any()) return false;
             if (!lines.First().StartsWith(Consts.EXTM3U)) return false;
@@ -32,7 +32,7 @@ namespace M3uParser
           
             if (versionItem != null)
             {
-                var version = versionItem.Replace(Consts.EXT_X_VERSION, "");
+                var version = versionItem.Replace(Consts.EXT_X_VERSION, "").Replace(",", "");
                 if (int.TryParse(version, out var v)) 
                     playList.Version = v;
 
@@ -41,7 +41,7 @@ namespace M3uParser
             var mediaSequenceItem = lines.FirstOrDefault(p => p.StartsWith(Consts.EXT_X_MEDIA_SEQUENCE));
             if (mediaSequenceItem != null)
             {
-                var mediaSequence = mediaSequenceItem.Replace(Consts.EXT_X_MEDIA_SEQUENCE, "");
+                var mediaSequence = mediaSequenceItem.Replace(Consts.EXT_X_MEDIA_SEQUENCE, "").Replace(",", "");
                 if (int.TryParse(mediaSequence, out var seq))
                     playList.MediaSequence = seq;
             }
@@ -49,7 +49,7 @@ namespace M3uParser
             var targetDurationItem = lines.FirstOrDefault(p => p.StartsWith(Consts.EXT_X_TARGETDURATION));
             if (targetDurationItem != null)
             {
-                var targetDuration = targetDurationItem.Replace(Consts.EXT_X_TARGETDURATION, "");
+                var targetDuration = targetDurationItem.Replace(Consts.EXT_X_TARGETDURATION, "").Replace(",", "");
                 if (int.TryParse(targetDuration, out var maxDuration))
                     playList.TargetDuration = maxDuration;
             }
@@ -153,6 +153,6 @@ namespace M3uParser
 
 
             return true;
-        }
+        }        
     }
 }
