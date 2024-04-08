@@ -15,9 +15,6 @@
 <a href="https://github.com/fallingrust/M3uParser/blob/master/LICENSE.txt">
 <img alt="MIT License" src="https://img.shields.io/github/license/fallingrust/M3uParser">
 </a>
-<a href="https://github.com/fallingrust/M3uParser/blob/master/LICENSE.txt">
-<img alt="MIT License" src="https://img.shields.io/github/license/fallingrust/M3uParser">
-</a>
 
 ### 关于
 
